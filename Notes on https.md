@@ -4,7 +4,7 @@ On an episerver project, to be able to log in, you have to:
 
 - Before following the steps below, go to Epi-project, admin/config - manage webpages and add the localhost:(https port) or the domain name with https protocol. Optional to make it primary. **P**
 
-- Install URLRewrite on IIS (for version 2.0) from here <https://www.iis.net/downloads/microsoft/url-rewrite>. **P**
+- Install URLRewrite on IIS (for version 2.0) from here <https://www.iis.net/downloads/microsoft/url-rewrite>. (Works With: IIS 7, IIS 7.5, IIS 8, IIS 8.5, IIS 10). **P**
 
 - Add on project's web.config file this snippet (inside the system.webServer): **P**
   ````
@@ -35,6 +35,7 @@ On an episerver project, to be able to log in, you have to:
 - Change the indexing service url on the web.config file. **P**
 
 - On production- if it doesn't exist - create a bindind of the page, that points to a http protocol. **P** 
+
 ## To enable https on Visual Studio
 
 - Set SSL to true on project's properties. 

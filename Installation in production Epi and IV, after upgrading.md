@@ -5,10 +5,14 @@
 
 * Download the production databases, both for Epi and IV. The databases have to **get upgraded** to the respective versions of the local projects.
 
+    **OBS: It is possible to upgrade the Epi-database on the production environment. See on 'working on remote server' below**
+
 * Be aware of the **production-Server version**. The databases have to be restored and re-produced at the same SQL-Server version instance, otherwise thay wont't be restored to the production-Server.  
 
 * Create new databases with differnt names than the _old databases_ from the server. These names will follow the databases, when you 'll install them later, in the production-Server and for safety reasons it's good to be different. **Restore and overwrite** the _new databases_ with the _old databases_.    
     **OBS**: Create a new user for the databases to log in with it.   
+
+
 
 #### Imagevault
 
@@ -50,15 +54,27 @@
 
 * Place the upgraded project-folders somewhere beside the old ones.  
 
-* Get backups of the databases. 
+* Copy the _license_ files, both for Epi and IV, from the old project and core to the new installation folders.
+
+* For https sites, check if the URLrewrite-extension is installed on IIS. If not, get it from here: <https://www.iis.net/downloads/microsoft/url-rewrite>  
+
+If you have upgraded the databases localy:  
+
+* Get backups of the remote(production) databases. 
 
 * Restore the new upgraded databases with the new names. It is possible to use the old logins here.
 
 * Correct the connection strings for Epi and IV.
 
-* Copy the _license_ files, both for Epi and IV, from the old project and core to the new installation folders.
+#### Upgrading the Epi-database on the production environment  
 
-* For https sites, check if the URLrewrite-extension is installed on IIS. If not, get it from here: <https://www.iis.net/downloads/microsoft/url-rewrite>
+* See here for more details:  
+<https://world.episerver.com/documentation/Items/Installation-Instructions/Installing-Episerver-updates/updating-configuration-and-database-schemas/>  
+
+* To get the above thing to work, you have to cd (point the folder) where the .bat file lives.
+
+* In case you want to convert the database to UTC, follow these instructions:  
+ <https://tedgustaf.com/blog/2016/upgrade-to-episerver-10/>
 
 The following steps apply to both test-sites and/or production-sites.
 
@@ -74,13 +90,16 @@ The following steps apply to both test-sites and/or production-sites.
         - Check if the **Url** to ui, match. Check also, for other possible paths that should be changed. 
         
     - Web.config  
+        - Check and compare the **authorization method** between the Epi-project and the IIS.
         - Check the **cookie name**, if it's the same with the old one.  
         - Change the **machineKey** to match the server's machine key.  
         - In case of https, activate the **rewrite/rule**.  
         - Check again the **path to UI** to match with the server's.  
-        - Check all the **authorization role-names** to match with the server's.  
+        - Check all the **authorization** and **role-names** to match with the server's. 
+        - Check the **path in episerver.search** to match. 
         - Check the **path in episerver.search.indexingservice** to match.  
         - Check the **smtp** adress. Change to the client's. 
+        
      
 #### Imagevault
 
